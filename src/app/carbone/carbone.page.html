@@ -1,0 +1,171 @@
+<ion-header>
+  <ion-toolbar color="success" >
+    <ion-buttons slot="start">
+      <ion-back-button text="Profil"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Mon empreinte carbone
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+  <ion-content responsive-sm color="tertiary" >
+    <ion-row justify-content-center>
+     
+  
+    <ion-col sizeLg="3" sizeMd="3" sizeXs="12" >
+    </ion-col> 
+    <ion-col sizeLg="6" sizeMd="6" sizeXs="12" color="light" >
+ 
+     <ion-list>
+        <div style="text-align: center;">
+          <h4>Calculer mon empreinte carbone </h4>
+        </div>
+
+       
+        <ion-label >
+        
+        </ion-label>
+        <ion-label >
+        <ion-item class="roundedInput">
+          <ion-label  position="floating">Nombre de Km parcouru(s) *</ion-label>
+          <ion-input inputmode="number" [(ngModel)]="dist" >  </ion-input>
+        </ion-item>
+        </ion-label>
+        <ion-label >
+        
+      </ion-label>
+
+      </ion-list>
+
+
+
+     <ion-list style="margin-top: 20px;">
+
+      <ion-item >
+            <ion-label >
+              <ion-text class="ion-text-wrap">
+                <h2><b>TGV</b></h2>
+              </ion-text>
+            </ion-label>
+            <ion-label >
+                <h2><b>{{dist*1.7}}</b> g de CO2 par Km </h2>
+            </ion-label>
+      </ion-item>
+
+      <ion-item >
+        <ion-label >
+          <ion-text class="ion-text-wrap">
+            <h2><b>Métro </b></h2>
+          </ion-text>
+        </ion-label>
+        <ion-label >
+            <h2><b>{{dist*3.8}}</b> g de CO2 par Km </h2>
+        </ion-label>
+  </ion-item>
+
+
+  <ion-item >
+    <ion-label >
+      <ion-text class="ion-text-wrap">
+        <h2><b> RER</b></h2>
+      </ion-text>
+    </ion-label>
+    <ion-label >
+        <h2><b>{{dist*4.75}}</b> g de CO2 par Km </h2>
+    </ion-label>
+</ion-item>
+
+
+<ion-item >
+  <ion-label >
+    <ion-text class="ion-text-wrap">
+      <h2><b>Intercité</b></h2>
+    </ion-text>
+  </ion-label>
+  <ion-label >
+      <h2><b>{{dist*5.3}}</b> g de CO2 par Km </h2>
+  </ion-label>
+</ion-item>
+
+<ion-item >
+  <ion-label >
+    <ion-text class="ion-text-wrap">
+      <h2><b>TER</b></h2>
+    </ion-text>
+  </ion-label>
+  <ion-label >
+      <h2><b>{{dist*24.8}}</b> g de CO2 par Km </h2>
+  </ion-label>
+</ion-item>
+
+
+
+						
+<ion-item >
+  <ion-label >
+    <ion-text class="ion-text-wrap">
+      <h2><b>Scooter ou moto légère</b></h2>
+    </ion-text>
+  </ion-label>
+  <ion-label >
+      <h2><b>{{dist*76.30}}</b> g de CO2 par Km </h2>
+  </ion-label>
+</ion-item>
+
+<ion-item >
+  <ion-label >
+    <ion-text class="ion-text-wrap">
+      <h2><b>Voiture électrique</b></h2>
+    </ion-text>
+  </ion-label>
+  <ion-label >
+      <h2><b>{{dist*103.40}}</b> g de CO2 par Km </h2>
+  </ion-label>
+</ion-item>
+
+<ion-item >
+  <ion-label >
+    <ion-text class="ion-text-wrap">
+      <h2><b>Bus</b></h2>
+    </ion-text>
+  </ion-label>
+  <ion-label >
+      <h2><b>{{dist*112.70}}</b> g de CO2 par Km </h2>
+  </ion-label>
+</ion-item>
+
+<ion-item >
+  <ion-label >
+    <ion-text class="ion-text-wrap">
+      <h2><b>Voiture thermique</b></h2>
+    </ion-text>
+  </ion-label>
+  <ion-label >
+      <h2><b>{{dist*217.60}}</b> g de CO2 par Km </h2>
+  </ion-label>
+</ion-item>
+
+
+<ion-item >
+  <ion-label >
+    <ion-text class="ion-text-wrap">
+      <h2><b>Avion</b></h2>
+    </ion-text>
+  </ion-label>
+  <ion-label >
+      <h2><b>{{dist*285}}</b> g de CO2 par Km </h2>
+  </ion-label>
+</ion-item>
+
+</ion-list>
+    </ion-col>
+  
+    <ion-col sizeLg="3" sizeMd="3" sizeXs="12" class="padding"  >
+    </ion-col> 
+  
+    </ion-row>
+    </ion-content>
+    
+    
+  

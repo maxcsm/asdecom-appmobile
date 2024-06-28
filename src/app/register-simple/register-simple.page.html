@@ -1,0 +1,81 @@
+
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start" color="primary">
+      <ion-back-button ></ion-back-button>
+    </ion-buttons>
+    <ion-title > Nouvelle inscription  </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  color="tertiary">
+<ion-row  color="tertiary">
+  <ion-col sizeLg="3" sizeMd="3" sizeXs="12" >
+  </ion-col>
+  <ion-col sizeLg="6" sizeMd="6" sizeXs="12" class="bloc">
+
+
+
+
+         <form [formGroup]="onRegisterForm1" (ngSubmit)="register()" novalidate class="list-form">
+          <h2 style="color: white;"> Informations </h2>
+      
+           <ion-row >
+            <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+               <ion-item class="roundedInput">
+                 <ion-label position="floating">Nom *</ion-label>
+                <ion-input inputmode="text" [(ngModel)]="lastname" formControlName="lastname">  </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+           <ion-row >
+            <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+               <ion-item class="roundedInput">
+                <ion-label position="floating">Prénom * </ion-label>
+                <ion-input inputmode="text"[(ngModel)]="firstname" formControlName="firstname">  </ion-input>
+              </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row >
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >  
+            <ion-item class="roundedInput">
+              <ion-label  position="floating">E-mail *</ion-label>
+              <ion-input inputmode="text" [(ngModel)]="email" formControlName="email">  </ion-input>
+            </ion-item>
+          </ion-col>
+         </ion-row>
+
+       <ion-row>
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+          <ion-item class="roundedInput">
+            <ion-label color="dark" position="stacked">  <ion-icon name="lock-closed-outline"></ion-icon>  Mot de passe </ion-label>
+            <ion-input  type="password"  [(ngModel)]="password"  placeholder="Mot de passe" formControlName="password"></ion-input>
+          </ion-item>
+        </ion-col>
+       </ion-row>
+
+       <ion-row>
+        <ion-col>
+        <ion-button type="submit" color="primary" expand="block" [disabled]="!onRegisterForm1.valid">  Suivant   </ion-button>
+        </ion-col>
+        </ion-row>
+      </form>
+
+</ion-col>  
+
+<ion-col sizeLg="3" sizeMd="3" sizeXs="12" >
+</ion-col>
+</ion-row>
+
+
+</ion-content>
+
+
+
+
+
+
+
+

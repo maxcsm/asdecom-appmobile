@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title >Quiz</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+
+  <ion-row>
+    <ion-col sizeLg="3" sizeMd="3" sizeXs="12" >
+    </ion-col> 
+    <ion-col sizeLg="6" sizeMd="6" sizeXs="12" color="light" >
+      <ion-list>
+
+
+      <h1>Classement</h1>
+        <ion-item  *ngFor="let item of classements">
+          <ion-avatar slot="start"  [ngStyle]="{'background-color': item.color}" style="padding:3px"  >
+            <img  src="{{item.user_avatar}}">
+          </ion-avatar>
+            <ion-label class="ion-text-wrap">
+              <h2>{{item.firstname}}  {{item.lastname}}</h2>
+              <h3>{{item.city}}</h3>
+          </ion-label>
+          <ion-badge  button slot="end"> <ion-icon name="trophy-outline"></ion-icon> {{item.point}}</ion-badge>
+        </ion-item>
+      </ion-list>
+
+
+      <ion-button color="light" size="medium" (click)="next2()" > Voir plus </ion-button>
+
+
+      <h1>Questionnaires</h1>
+
+
+      <ion-list *ngFor="let item of posts" lines="none" >
+
+       <div *ngIf="item.iduser=='null'" style="margin-top: 10px;">
+        <ion-item button color="secondary"  (click)="view($event, item)">
+        <ion-thumbnail slot="start">
+          <img  src="{{UrlImage}}images/{{item.image}}" *ngIf="item.image"  >
+        </ion-thumbnail>
+        {{item.title}} <br>
+        Quizz en attente
+      </ion-item>
+      </div>
+
+
+    
+      <ion-item button color="primary" *ngIf="item.iduser!=='null'" style="margin-top: 10px;">
+        <ion-thumbnail slot="start">
+          <img  src="{{UrlImage}}images/{{item.image}}" *ngIf="item.image"  >
+        </ion-thumbnail>
+        {{item.title}} <br>
+        {{ item.questions }} / {{ item.nbquestionbytest }} Quizz terminé
+      </ion-item>
+ 
+    </ion-list>
+   
+
+  </ion-col> 
+  <ion-col sizeLg="3" sizeMd="3" sizeXs="12" >
+  </ion-col> 
+  </ion-row>
+
+</ion-content>

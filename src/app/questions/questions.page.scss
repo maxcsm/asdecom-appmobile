@@ -1,0 +1,19 @@
+ion-list ion-radio-group ion-item{
+    margin-bottom: 5%;
+    margin-left: 5%;
+    width: 90%;
+    //z-index: 1;
+
+}
+
+.container{
+    border: 0.2px solid var(--ion-color-primary);
+    border-radius: 12px ;
+}
+ion-item:hover {
+
+  background-color:var(--ion-color-primary) !important;
+}
+.icon{
+  padding-bottom: 0%;
+}

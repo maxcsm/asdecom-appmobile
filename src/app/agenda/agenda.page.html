@@ -1,0 +1,224 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title >
+     Agenda
+     </ion-title>
+     <ion-buttons slot="end" style="display: none;">
+      <ion-button  id="open-storie" color="primary"><ion-icon name="add-circle"></ion-icon> Ajouter  </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="tertiary" >
+  <ion-row justify-content-center>
+    <ion-col size-md="3" size-lg="3" size-xs="12">
+    </ion-col>
+
+    <ion-col align-self-center size-md="6" size-lg="6" size-xs="12">
+
+      <ion-accordion-group >
+        <ion-accordion *ngFor="let item of posts" class="divider-day" style="background-color: #e6007e;">
+          <ion-item-divider color="primary" slot="header" >
+            <ion-label style="text-transform: capitalize;"> <b> {{item.name}} {{item.day}}  {{item.month}} {{item.date| date:'YYYY' }}</b></ion-label>
+            <ion-buttons slot="end"  >
+              <ion-button color="light" ><ion-icon name="chevron-down-outline"></ion-icon></ion-button>
+            </ion-buttons>
+          </ion-item-divider>
+
+          <div slot="content">
+            <ion-item *ngFor="let item2 of item.events" >
+              <ion-label >
+                <ion-text>
+                  <ion-toggle color="success" [ngModel]="item2.checkapp"  checked="item2.checkapp" (click)="change($event, item2)" style="display: none;"></ion-toggle>
+                  <h2><b> {{item2.title}} </b></h2>
+                  <small> de <b>{{item2.start_at | date:'HH:mm' }}</b> à <b> {{item2.end_at | date:'HH:mm' }} </b> </small> <br>
+                  <small><ion-icon name="navigate-circle-outline"></ion-icon> {{item2.content}} </small> 
+                  
+                </ion-text>
+              </ion-label>
+
+
+              <ion-label   slot = "end" >
+                <ion-badge color="medium" slot="end" *ngIf="item2.state==1">  Info </ion-badge>
+                <ion-badge color="medium" slot="end" *ngIf="item2.state==2">  Event </ion-badge>
+                <ion-badge color="success" slot="end" *ngIf="item2.state==3"> Atelier </ion-badge>
+              </ion-label>
+
+
+              <ion-buttons slot="end" *ngIf="item2.state==3" >
+                <ion-button color="primary" (click)="edit($event, item2)"><ion-icon name="arrow-forward-circle-outline"></ion-icon></ion-button>
+              </ion-buttons>
+
+              <ion-buttons slot="end" *ngIf="item2.state==1&&item2.atelier_id!==null" >
+                <ion-button color="primary"(click)="edit2($event, item2)"><ion-icon name="arrow-forward-circle-outline"></ion-icon></ion-button>
+              </ion-buttons>
+
+
+              <ion-buttons slot="end" *ngIf="item2.state==2&&item2.atelier_id!==null" >
+                <ion-button color="primary" (click)="edit2($event, item2)"><ion-icon name="arrow-forward-circle-outline"></ion-icon></ion-button>
+              </ion-buttons>
+           
+            </ion-item>
+          </div>
+        </ion-accordion>
+       
+      </ion-accordion-group>
+
+    
+      <ion-list lines="none" style="margin-top: 20px;" >
+ 
+ 
+   
+        <ion-item color="primary" slot="header"  class="recap-day" >
+          <ion-label style="text-transform: capitalize;"> <b> Récapitulatif jour 1</b></ion-label>
+        </ion-item>
+
+    
+        <ion-item class="item-short">
+          <ion-label >
+            <ion-text >
+              <h2><b> Jour 1 </b></h2>
+              <small> Inscription 1er jour</small> <br>
+            </ion-text>
+          </ion-label>
+          <ion-label >
+            <select  [(ngModel)]="label1"  (change)="change1()"  style="background: white;color: black;">
+              <option value="1">Oui</option>
+              <option value="0">Non</option>
+          </select>
+          </ion-label>
+
+        </ion-item>
+
+     
+        <ion-item class="item-short">
+
+          <ion-label >
+            <small> Inscription Déjeuner </small> <br>
+          </ion-label>
+          <ion-label >
+            <select  [(ngModel)]="label2"  (change)="change2()"  style="background: white;color: black;">
+              <option value="1">Oui</option>
+              <option value="0">Non</option>
+          </select>
+          </ion-label>
+        </ion-item>
+
+
+
+        <ion-item class="item-short">
+          <ion-label >
+            <small>  Inscription Dîner</small> <br>
+          </ion-label>
+          <ion-label >
+            <select  [(ngModel)]="label3"  (change)="change3()"  style="background: white;color: black;">
+              <option value="1">Oui</option>
+              <option value="0">Non</option>
+          </select>
+          </ion-label>
+        </ion-item>
+
+
+
+      
+        <ion-item class="item-short">
+          <ion-label >
+            <small> Transfert Aller Gare</small> <br>
+          </ion-label>
+          <ion-label >
+            <select  [(ngModel)]="label7"  (change)="change7()"  style="background: white;color: black;">
+              <option value="1">Oui</option>
+              <option value="0">Non</option>
+          </select>
+          </ion-label>
+        </ion-item>
+       
+        <ion-item class="item-short">
+          <ion-label >
+            <small> Transfert Aller Aéroport</small> <br>
+          </ion-label>
+          <ion-label >
+            <select  [(ngModel)]="label8"  (change)="change8()"  style="background: white;color: black;">
+              <option value="1">Oui</option>
+              <option value="0">Non</option>
+          </select>
+          </ion-label>
+        </ion-item>
+
+      </ion-list>
+
+
+      <ion-list lines="none" style="margin-top: 20px;" >
+
+        <ion-item color="primary" slot="header"  class="recap-day" >
+          <ion-label style="text-transform: capitalize;"> <b> Récapitulatif jour 2</b></ion-label>
+        </ion-item>
+
+        <ion-item class="item-short">
+          <ion-label >
+            <ion-text >
+              <h2><b> Jour 2 </b></h2>
+              <small> Inscription 2ème jour</small> <br>
+            </ion-text>
+          </ion-label>
+          <ion-label >
+            <select  [(ngModel)]="label4"  (change)="change4()"  style="background: white;color: black;">
+              <option value="1">Oui</option>
+              <option value="0">Non</option>
+          </select>
+          </ion-label>
+        </ion-item>
+
+
+        <ion-item class="item-short">
+          <ion-label >
+            <small> Inscription Déjeuner</small> <br>
+          </ion-label>
+          <ion-label >
+            <select  [(ngModel)]="label5"  (change)="change5()"  style="background: white;color: black;">
+              <option value="1">Oui</option>
+              <option value="0">Non</option>
+          </select>
+          </ion-label>
+        </ion-item>
+    
+     
+        <ion-item class="item-short">
+          <ion-label >
+            <small> Transfert Retour Gare </small> <br>
+          </ion-label>
+          <ion-label >
+            <select  [(ngModel)]="label9"  (change)="change9()"  style="background: white;color: black;">
+              <option value="1">Oui</option>
+              <option value="0">Non</option>
+          </select>
+          </ion-label>
+        </ion-item>
+    
+        <ion-item class="item-short">
+          <ion-label >
+            <small> Transfert Retour Aéroport</small> <br>
+          </ion-label>
+          <ion-label >
+            <select  [(ngModel)]="label10"  (change)="change10()"  style="background: white;color: black;">
+              <option value="1">Oui</option>
+              <option value="0">Non</option>
+          </select>
+          </ion-label>
+        </ion-item>
+
+
+        </ion-list>
+
+
+
+    </ion-col>
+    <ion-col size-md="3" size-lg="3" size-xs="12">
+    </ion-col>
+  </ion-row>
+
+
+
+</ion-content>
+
+

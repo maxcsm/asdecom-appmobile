@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title >
+     Ateliers
+     </ion-title>
+     <ion-buttons slot="end" style="display: none;">
+      <ion-button  id="open-storie" color="primary"><ion-icon name="add-circle"></ion-icon> Ajouter  </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content color="tertiary" >
+  <ion-row justify-content-center >
+    <ion-col size-md="3" size-lg="3" size-xs="12">
+    </ion-col>
+
+    <ion-col align-self-center size-md="6" size-lg="6" size-xs="12">
+      <ion-row>
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="6" *ngFor="let item of posts">
+          <ion-card style="background-color: white;color:black;height: 100px;" (click)="post($event, item)" >
+            <img  src="{{item.image}}" *ngIf="item.image"  class='image-view' height="100px">
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size-md="3" size-lg="3" size-xs="12">
+    </ion-col>
+  </ion-row>
+
+
+</ion-content>

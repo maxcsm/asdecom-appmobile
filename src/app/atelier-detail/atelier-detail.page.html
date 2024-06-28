@@ -1,0 +1,244 @@
+
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button ></ion-back-button>
+    </ion-buttons>
+    <ion-title > Atelier </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content responsive-sm  class="ion-padding" color="tertiary">
+
+<ion-row>
+<ion-col sizeLg="2" sizeMd="2" sizeXs="12" >    
+</ion-col>
+<ion-col sizeLg="8" sizeMd="8" sizeXs="12" >
+
+     <ion-list style="padding-bottom: 50px;">
+      <div *ngFor="let item of posts" style="text-align: center;">
+      <img  style="text-align: center;" src="{{item.image}}" *ngIf="item.image"   >
+      <h1 > {{item.title}} </h1>    
+
+
+     <div style="padding: 10px;"[innerHTML]="item.content"></div>
+    </div>
+     </ion-list>
+
+
+     <ion-list style="text-align: center;margin-top: 50px;" >
+
+      <div *ngIf="notationatelier==0"> 
+          
+      <h5> Votre note : qualité des informations </h5>   
+        <span style="font-size:100%;">&#9734;</span>
+        <span style="font-size:100%;">&#9734;</span>
+        <span style="font-size:100%;">&#9734;</span>
+        <span style="font-size:100%;">&#9734;</span>
+        <span style="font-size:100%;">&#9734;</span>
+
+        <h5> Votre note : qualité de la présentation </h5>   
+        <span style="font-size:100%;">&#9734;</span>
+        <span style="font-size:100%;">&#9734;</span>
+        <span style="font-size:100%;">&#9734;</span>
+        <span style="font-size:100%;">&#9734;</span>
+        <span style="font-size:100%;">&#9734;</span>
+
+
+        <h5>Ajouter un commentaire : </h5>   
+
+        <ion-button ion-button outline item-end small color="light"  (click)="openModalNoteAtelier()" color="primary" style="text-transform: capitalize;">
+        Ajoutez une note 
+        </ion-button>
+       </div>
+
+
+
+      <div *ngFor="let item of notationatelier">
+      <h5> Votre note : qualité des informations </h5>   
+      <div *ngIf="item.note_info==1"> 
+        <span style="font-size:100%;color:blue;">&bigstar;</span>
+        <span style="font-size:100%;">&bigstar;</span>
+        <span style="font-size:100%;">&bigstar;</span>
+        <span style="font-size:100%;">&bigstar;</span>
+        <span style="font-size:100%;">&bigstar;</span>
+        </div>
+  
+        <div *ngIf="item.note_info==2"> 
+        <span style="font-size:100%;color:blue;">&bigstar;</span>
+        <span style="font-size:100%;color:blue;">&bigstar;</span>
+        <span style="font-size:100%;">&bigstar;</span>
+        <span style="font-size:100%;">&bigstar;</span>
+        <span style="font-size:100%;">&bigstar;</span>
+        </div>
+  
+        <div *ngIf="item.note_info==3"> 
+        <span style="font-size:100%;color:blue;">&bigstar;</span>
+        <span style="font-size:100%;color:blue;">&bigstar;</span>
+        <span style="font-size:100%;color:blue;">&bigstar;</span>
+        <span style="font-size:100%;">&bigstar;</span>
+        <span style="font-size:100%;">&bigstar;</span>
+        </div>
+  
+        <div *ngIf="item.note_info==4"> 
+        <span style="font-size:100%;color:blue;">&bigstar;</span>
+        <span style="font-size:100%;color:blue;">&bigstar;</span>
+        <span style="font-size:100%;color:blue;">&bigstar;</span>
+        <span style="font-size:100%;color:blue;">&bigstar;</span>
+        <span style="font-size:100%;">&bigstar;</span>
+        </div>
+  
+        <div *ngIf="item.note_info==5"> 
+        <span style="font-size:100%;color:blue;">&bigstar;</span>
+        <span style="font-size:100%;color:blue;">&bigstar;</span>
+        <span style="font-size:100%;color:blue;">&bigstar;</span>
+        <span style="font-size:100%;color:blue;">&bigstar;</span>
+        <span style="font-size:100%;color:blue;">&bigstar;</span>
+        </div>
+
+
+        <h5> Votre note : qualité de la présentation </h5>   
+        <div *ngIf="item.note_presentation==1"> 
+          <span style="font-size:100%;color:blue;">&bigstar;</span>
+          <span style="font-size:100%;">&bigstar;</span>
+          <span style="font-size:100%;">&bigstar;</span>
+          <span style="font-size:100%;">&bigstar;</span>
+          <span style="font-size:100%;">&bigstar;</span>
+          </div>
+    
+          <div *ngIf="item.note_presentation==2"> 
+          <span style="font-size:100%;color:blue;">&bigstar;</span>
+          <span style="font-size:100%;color:blue;">&bigstar;</span>
+          <span style="font-size:100%;">&bigstar;</span>
+          <span style="font-size:100%;">&bigstar;</span>
+          <span style="font-size:100%;">&bigstar;</span>
+          </div>
+    
+          <div *ngIf="item.note_presentation==3"> 
+          <span style="font-size:100%;color:blue;">&bigstar;</span>
+          <span style="font-size:100%;color:blue;">&bigstar;</span>
+          <span style="font-size:100%;color:blue;">&bigstar;</span>
+          <span style="font-size:100%;">&bigstar;</span>
+          <span style="font-size:100%;">&bigstar;</span>
+          </div>
+    
+          <div *ngIf="item.note_presentation==4"> 
+          <span style="font-size:100%;color:blue;">&bigstar;</span>
+          <span style="font-size:100%;color:blue;">&bigstar;</span>
+          <span style="font-size:100%;color:blue;">&bigstar;</span>
+          <span style="font-size:100%;color:blue;">&bigstar;</span>
+          <span style="font-size:100%;">&bigstar;</span>
+          </div>
+    
+          <div *ngIf="item.note_presentation==5"> 
+          <span style="font-size:100%;color:blue;">&bigstar;</span>
+          <span style="font-size:100%;color:blue;">&bigstar;</span>
+          <span style="font-size:100%;color:blue;">&bigstar;</span>
+          <span style="font-size:100%;color:blue;">&bigstar;</span>
+          <span style="font-size:100%;color:blue;">&bigstar;</span>
+          </div>
+
+          <h5> Votre commentaire : </h5>   
+          <p>{{item.comment}} </p> 
+
+     </div>
+  
+     </ion-list>
+
+
+     <h5 style="color:white"> Les produits  </h5>   
+      <ion-list style="margin-top: 10px;" >
+      <ion-item button *ngFor="let item of products">
+      <ion-text>
+      <b>{{item.title}} </b> 
+      <div *ngIf="item.note==null"> 
+      <span style="font-size:100%;">&#9734;</span>
+      <span style="font-size:100%;">&#9734;</span>
+      <span style="font-size:100%;">&#9734;</span>
+      <span style="font-size:100%;">&#9734;</span>
+      <span style="font-size:100%;">&#9734;</span>
+   
+      </div>
+
+
+      <div *ngIf="item.note==1"> 
+      <span style="font-size:100%;color:blue;">&bigstar;</span>
+      <span style="font-size:100%;">&bigstar;</span>
+      <span style="font-size:100%;">&bigstar;</span>
+      <span style="font-size:100%;">&bigstar;</span>
+      <span style="font-size:100%;">&bigstar;</span>
+      </div>
+
+      <div *ngIf="item.note==2"> 
+      <span style="font-size:100%;color:blue;">&bigstar;</span>
+      <span style="font-size:100%;color:blue;">&bigstar;</span>
+      <span style="font-size:100%;">&bigstar;</span>
+      <span style="font-size:100%;">&bigstar;</span>
+      <span style="font-size:100%;">&bigstar;</span>
+      </div>
+
+      <div *ngIf="item.note==3"> 
+      <span style="font-size:100%;color:blue;">&bigstar;</span>
+      <span style="font-size:100%;color:blue;">&bigstar;</span>
+      <span style="font-size:100%;color:blue;">&bigstar;</span>
+      <span style="font-size:100%;">&bigstar;</span>
+      <span style="font-size:100%;">&bigstar;</span>
+      </div>
+
+      <div *ngIf="item.note==4"> 
+      <span style="font-size:100%;color:blue;">&bigstar;</span>
+      <span style="font-size:100%;color:blue;">&bigstar;</span>
+      <span style="font-size:100%;color:blue;">&bigstar;</span>
+      <span style="font-size:100%;color:blue;">&bigstar;</span>
+      <span style="font-size:100%;">&bigstar;</span>
+      </div>
+
+      <div *ngIf="item.note==5"> 
+      <span style="font-size:100%;color:blue;">&bigstar;</span>
+      <span style="font-size:100%;color:blue;">&bigstar;</span>
+      <span style="font-size:100%;color:blue;">&bigstar;</span>
+      <span style="font-size:100%;color:blue;">&bigstar;</span>
+      <span style="font-size:100%;color:blue;">&bigstar;</span>
+      </div>
+
+      <p>{{item.comment}} </p> 
+     </ion-text>
+
+     <ion-button ion-button outline item-end small color="light" slot = "end" (click)="openModal($event, item)" *ngIf="item.note==null"  color="primary" style="text-transform: capitalize;">
+      Ajoutez 
+      </ion-button>
+  </ion-item>
+  </ion-list>
+
+
+  <h5 style="color:white"> Les fournisseurs </h5>   
+  <ion-list>
+  <ion-item *ngFor="let item of suppliers" >
+    
+    <ion-label >
+
+      <ion-text>
+        
+        <h2><b>{{item.firstname}} {{item.lastname}}</b> <br>
+        Fournisseur, {{item.company}}</h2>
+        <b><ion-icon color="tertiary" name="person-circle-outline"></ion-icon> <small style="padding-left: 15px;"> {{item.customer_type}}  </small></b> <br>
+        <b><ion-icon color="tertiary" name="mail-outline"></ion-icon> <small style="padding-left: 15px;"> <a href="mailto:{{item.email}}" > {{item.email}}</a>  </small></b> <br>
+        <b><ion-icon color="tertiary" name="browsers-outline"></ion-icon> <small style="padding-left: 15px;"><a target="_blank" href="https://{{item.website}}" > {{item.website}}</a> </small></b><br>
+        <b><ion-icon color="tertiary" name="call-outline"></ion-icon> <small style="padding-left: 15px;"><a href="tel: {{item.phone_mobile}}" > {{item.phone_mobile}}</a> </small></b>
+      </ion-text>
+    </ion-label>
+  </ion-item>
+</ion-list>
+
+
+</ion-col>
+
+<ion-col sizeLg="2" sizeMd="2" sizeXs="12" class="padding" >
+</ion-col>  
+</ion-row>
+</ion-content>
+
+
+
+

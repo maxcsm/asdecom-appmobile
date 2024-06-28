@@ -1,0 +1,588 @@
+
+
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start" >
+      <ion-menu-button ></ion-menu-button>
+    </ion-buttons>
+    <ion-title > Mon profil </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content responsive-sm color="tertiary" >
+  <ion-row>
+  <ion-col sizeLg="3" sizeMd="3" sizeXs="12" >
+  </ion-col> 
+  <ion-col sizeLg="6" sizeMd="6" sizeXs="12" color="light" >
+    <div class="profil-header">
+
+      
+       <div class="header">
+        <div class="space-between">
+          <div class="followings">
+            <img src="{{session_image}}" width="80px"> 
+          </div>
+          <div class="followings">
+            <img  src="./assets/map/map1.png" style="width: 80px;" >
+          </div>
+        </div>     
+      </div>
+      <div class="flex">
+          <div class="border-white" >
+            <div class="img-box"  [ngStyle]="{'background-color': color}" >
+              <img src="{{user_avatar}}" class="circle-pic">
+            </div>
+          </div>
+      </div>
+
+      <div style="text-align: center;">
+        <ion-button ion-button small color="secondary"  (click)="editPicture()" > Modifier <ion-icon name="create-outline"></ion-icon></ion-button>
+        <h4 style="text-transform: capitalize;">{{salutation}} {{firstname}} {{lastname}}</h4>
+        <h5 style="color:black;">{{customer_type}}</h5>
+        <b style="color:black;">{{company}} {{city}} {{cp}} </b>
+        <b style="color:black;">{{centre_regionale}}</b>
+      </div>
+    </div>
+  
+
+    <ion-row *ngIf="editpicture">
+      <ion-col sizeLg="2" sizeMd="2" sizeXs="12" >
+      </ion-col>
+      <ion-col sizeLg="8" sizeMd="8" sizeXs="12" >
+        <ion-card >
+          <ion-card-content>          
+          Depuis votre caméra 
+          <ion-button (click)="addFormCamera()" expand="block" color="primary">
+            <ion-icon name="camera-outline"></ion-icon> Camera
+          </ion-button>
+          </ion-card-content>
+  
+          <ion-card-content>          
+          Depuis votre la galerie photos 
+          <ion-button (click)="addFormGallery()" expand="block">
+            <ion-icon name="images-outline"></ion-icon> Galerie photos
+          </ion-button>
+          </ion-card-content>
+         </ion-card>
+      </ion-col>
+      <ion-col sizeLg="2" sizeMd="2" sizeXs="12" >
+      </ion-col>
+    </ion-row>
+
+    <h1> Mon inscription</h1>
+
+    <ion-list lines="none" *ngIf="edit==false" style="margin-top: 20px;" >
+      <ion-row >
+        <ion-col sizeLg="9" sizeMd="9" sizeXs="12" >
+          <ion-item  *ngFor="let item of posts"  lines="none">    
+              <ion-label> 
+              <ion-button  color="medium" slot="end" size="small"shape="round" *ngIf="item.customer_type=='business'" > Entreprise </ion-button>
+              <ion-button  color="medium" slot="end" size="small"shape="round" *ngIf="item.customer_type=='individual'" > Particulier </ion-button><br>
+              <b> {{item.salutation}} {{item.firstname}} {{item.lastname}}</b>  <br>
+              <b>  {{item.address}} </b><br>
+              <b>  {{item.cp}} {{item.city}}</b> <br>
+              Téléphone : <b> {{item.phone_mobile}} </b> <br>
+              E-mail :  <b>  {{item.email}} </b> <br>
+              </ion-label>
+              </ion-item>
+          </ion-col>   
+          <ion-col sizeLg="3" sizeMd="3" sizeXs="12" >    
+          <ion-item>
+          <div class="item-note" slot="end">
+          <ion-button ion-button item-end small color="secondary"  (click)="editpage()"><ion-icon name="create-outline"></ion-icon></ion-button>
+          </div>
+          </ion-item> 
+        </ion-col>
+    </ion-row>
+  </ion-list>
+
+
+  
+  <ion-list lines="none"  *ngIf="edit==true">
+  
+      <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >   
+         <ion-row >
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+            <ion-item class="roundedInput">
+              <ion-label position="floating" >Fonction *</ion-label>
+              <ion-input inputmode="text"[(ngModel)]="customer_type" placeholder="Fonction">  </ion-input>
+            </ion-item>
+          </ion-col>
+         </ion-row>
+
+         <ion-row >
+          <ion-col sizeLg="2" sizeMd="2" sizeXs="12" >
+            <ion-item  class="roundedInput">
+              <ion-label position="stacked">Civilité </ion-label>
+              <ion-select multiple="false" [(ngModel)]="salutation">
+                <ion-select-option value="M.">M. </ion-select-option>
+                <ion-select-option value="Mme.">Mme. </ion-select-option>
+              </ion-select>
+            </ion-item>
+         </ion-col>
+
+          <ion-col sizeLg="5" sizeMd="5" sizeXs="12" >
+             <ion-item class="roundedInput">
+               <ion-label color="dark" position="stacked">Nom</ion-label>
+              <ion-input inputmode="text"[(ngModel)]="lastname" placeholder="Nom" >  </ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col sizeLg="5" sizeMd="5" sizeXs="12" > 
+             <ion-item class="roundedInput">
+              <ion-label color="dark" position="stacked">Prénom</ion-label>
+              <ion-input inputmode="text"[(ngModel)]="firstname" placeholder="Prénom">  </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+
+      <ion-row >
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+          <ion-item class="roundedInput">
+            <ion-label color="dark" position="stacked">Adresse</ion-label>
+            <ion-input inputmode="text"[(ngModel)]="address" placeholder="Adresse">  </ion-input>
+          </ion-item>
+        </ion-col>
+       </ion-row>
+  
+      <ion-row >
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+          <ion-item class="roundedInput">
+            <ion-label color="dark" position="stacked">CP</ion-label>
+            <ion-input inputmode="text"[(ngModel)]="cp" placeholder="Code postal">  </ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+          <ion-item class="roundedInput">
+            <ion-label color="dark" position="stacked">Ville</ion-label>
+            <ion-input inputmode="text"[(ngModel)]="city" placeholder="Ville">  </ion-input>
+          </ion-item>
+        </ion-col>
+       </ion-row>
+  
+  
+      <ion-row >
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+          <ion-item class="roundedInput">
+            <ion-label color="dark" position="stacked"> Téléphone </ion-label>
+            <ion-input inputmode="phone"[(ngModel)]="phone_mobile" placeholder="mobile">  </ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" > 
+        </ion-col>
+       </ion-row>
+     
+        <ion-item >
+          <div class="item-note" slot="end">
+          <ion-button color="light" size="medium" (click)="editpage()" >Annuler </ion-button>
+          <ion-button color="secondary" size="medium" (click)="doSaveUser()">Enregistrer</ion-button>
+          </div>
+         </ion-item>
+      </ion-col>
+  </ion-list>
+
+
+
+<h1> Mon entreprise</h1>
+<ion-list lines="none" *ngIf="edit2==false"  class="list-md">
+  <ion-row >
+    <ion-col sizeLg="9" sizeMd="9" sizeXs="12" >
+
+      <ion-item lines="none" class="tweet">
+      <ion-label text-wrap>Mon entreprise  
+      <br>
+      <b> {{company}}</b>   <br>
+      </ion-label>
+      </ion-item>
+      <ion-item lines="none" class="tweet">
+        <ion-label text-wrap> Centre régional 
+      <br>
+      <b> {{centre_regionale}} </b>
+      </ion-label>
+      </ion-item>
+    </ion-col>
+
+    <ion-col sizeLg="3" sizeMd="3" sizeXs="12" >    
+      <ion-item>
+      <div class="item-note" slot="end">
+      <ion-button ion-button item-end small color="secondary"  (click)="editpage2()"><ion-icon name="create-outline"></ion-icon></ion-button>
+      </div>
+      </ion-item> 
+    </ion-col>
+</ion-row>
+</ion-list>
+
+
+
+
+
+<ion-list lines="none"  *ngIf="edit2==true">
+<ion-row >
+  <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+    <ion-row >
+      <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+        <ion-item class="roundedInput">
+          <ion-label position="floating">Nom entreprise *</ion-label>
+          <ion-input inputmode="text"[(ngModel)]="company" placeholder="Nom entreprise">  </ion-input>
+        </ion-item>
+      </ion-col>
+     </ion-row>
+              
+     <ion-row >
+      <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+        <ion-label position="floating">Centre régional *</ion-label>
+        <select [(ngModel)]="centre_regionale" style="background: white;color: black;">
+          <option value="{{item.tag_fr}}"  *ngFor="let item of categories" > {{item.tag_fr}}</option>
+        </select>
+      </ion-col>
+      <ion-col sizeLg="6" sizeMd="6" sizeXs="12" >
+      </ion-col>
+    </ion-row>
+
+
+
+    <ion-item >
+      <div class="item-note" slot="end">
+      <ion-button color="light" size="medium" (click)="editpage2()" >Annuler </ion-button>
+      <ion-button color="secondary" size="medium" (click)="doSaveUser()">Enregistrer</ion-button>
+      </div>
+     </ion-item>
+  </ion-col>
+</ion-row>
+</ion-list>
+
+
+<h1> Mon parcours </h1>
+
+
+  
+  <ion-list lines="none" *ngIf="edit3==false"  class="list-md">
+      <ion-row >
+        <ion-col sizeLg="9" sizeMd="9" sizeXs="12" >
+  
+          <ion-item lines="none" class="tweet">
+            <ion-label text-wrap>Mon âge
+            <br>
+            <b>  {{age}} ans </b>
+          </ion-label>
+          </ion-item>
+          <ion-item lines="none" class="tweet">
+            <ion-label text-wrap>Mon année d'arrivée dans la société 
+          <br>
+          <b>  {{arrived_date}} </b>
+          </ion-label>
+          </ion-item>
+          <ion-item lines="none" class="tweet">
+            <ion-label text-wrap>Mon parcours
+            <br>
+            <b>  {{parcours}} </b>
+          </ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col sizeLg="3" sizeMd="3" sizeXs="12" >    
+          <ion-item>
+          <div class="item-note" slot="end">
+          <ion-button ion-button item-end small color="secondary"  (click)="editpage3()"><ion-icon name="create-outline"></ion-icon></ion-button>
+          </div>
+          </ion-item> 
+        </ion-col>
+
+
+    </ion-row>
+  </ion-list>
+
+
+
+  <ion-list lines="none"  *ngIf="edit3==true">
+    <ion-row >
+      
+    <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >  
+      <ion-row >
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+          <b style="color:black;"> Date de naissance *</b>
+          <br>
+          <input type="date"  [(ngModel)]="birthdate" value="1980-01-01" min="1950-01-01"  style="background: white;color: black;" />
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >      
+              <b style="color:black;"> Mon année d'arrivée dans la société *</b>
+              <select [(ngModel)]="arrived_date" class="selectitem"  style="background: white;color: black;">
+                  <option value="2024">2024</option>
+                  <option value="2023">2023</option>
+                  <option value="2022">2022</option>
+                  <option value="2021">2021</option>
+                  <option value="2020">2020</option>
+                  <option value="2019">2019</option>
+                  <option value="2018">2018</option>
+                  <option value="2017">2017</option>
+                  <option value="2016">2016</option>
+                  <option value="2015">2015</option>
+                  <option value="2014">2014</option>
+                  <option value="2013">2013</option>
+                  <option value="2012">2012</option>
+                  <option value="2011">2011</option>
+                  <option value="2010">2010</option>
+                  <option value="2009">2009</option>
+                  <option value="2008">2008</option>
+                  <option value="2007">2007</option>
+                  <option value="2006">2006</option>
+                  <option value="2005">2005</option>
+                  <option value="2004">2004</option>
+                  <option value="2003">2003</option>
+                  <option value="2002">2002</option>
+                  <option value="2001">2001</option>
+                  <option value="2000">2000</option>
+                  <option value="1999">1999</option>
+                  <option value="1998">1998</option>
+                  <option value="1997">1997</option>
+                  <option value="1996">1996</option>
+                  <option value="1995">1995</option>
+                  <option value="1994">1994</option>
+                  <option value="1993">1993</option>
+                  <option value="1992">1992</option>
+                  <option value="1991">1991</option>
+                  <option value="1990">1990</option>
+              </select>
+          </ion-col>
+         </ion-row>
+
+        <ion-row>
+        <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+          <b style="color:black;"> Mon parcours *</b>
+          <ion-item class="roundedInput">
+            <ion-label  position="stacked">Mon parcours, mon expérience, me anecdotes et mes passions</ion-label>
+            <ion-textarea [autoGrow]="true" height=500px placeholder="Après 10 ans chez CASA, J'ai rebondi chez LECLERC dans mes produits passions ..." [autoGrow]="true" [(ngModel)]="parcours" >
+          </ion-textarea>
+          </ion-item>
+        </ion-col>
+       </ion-row>
+
+     
+        <ion-item >
+          <div class="item-note" slot="end">
+          <ion-button color="light" size="medium" (click)="editpage3()" >Annuler </ion-button>
+          <ion-button color="secondary" size="medium" (click)="doSaveUser()">Enregistrer</ion-button>
+          </div>
+         </ion-item>
+      </ion-col>
+  </ion-row>
+  </ion-list>
+
+
+  <h1> Mon hôtel</h1>
+  <ion-list lines="none" *ngIf="edit4==false" class="list-md">
+    <ion-row >
+      <ion-col sizeLg="9" sizeMd="9" sizeXs="12" >
+        <ion-item lines="none" >
+          <ion-label text-wrap>Mon regime alimentaire
+          <br>
+          <b> {{regime_alim}}  </b>
+        
+
+        </ion-label>
+        </ion-item>
+        <ion-item lines="none" *ngIf="regime_alim=='Allergique'" >
+          <ion-label text-wrap>Mes allergènes
+          <br>
+          <b>   {{notes}}  </b>
+        </ion-label>
+        </ion-item>
+
+
+        <ion-item lines="none" >
+          <ion-label text-wrap> Ma réservation d'hôtel 
+        <br>
+        <b>  {{resa_hotel}}  </b>
+        </ion-label>
+        </ion-item>
+        <ion-item lines="none" >
+          <ion-label text-wrap>Mon transport
+          <br>
+          <b>  {{transport}}  </b>
+        </ion-label>
+        </ion-item>
+      </ion-col>
+
+      <ion-col sizeLg="3" sizeMd="3" sizeXs="12" >    
+        <ion-item>
+        <div class="item-note" slot="end">
+        <ion-button ion-button item-end small color="secondary"  (click)="editpage4()"><ion-icon name="create-outline"></ion-icon></ion-button>
+        </div>
+        </ion-item> 
+      </ion-col>
+  </ion-row>
+</ion-list>
+
+
+
+<ion-list lines="none"  *ngIf="edit4==true">
+  <ion-row >
+    
+  <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >  
+    <ion-row >
+      <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+        <ion-label  position="floating"><b style="color:black;">Mon régime alimentaire</b></ion-label>
+        <select [(ngModel)]="regime_alim" color="light"  class="roundedInput"  style="background: white;color: black;">
+          <option value="Sans régime spécial"> Sans régime spécial</option>
+          <option value="Sans produits de la mer"> Sans produits de la mer</option>
+          <option value="Sans porc et sans alcool"> Sans porc et sans alcool</option>
+          <option value="Végétarien"> Végétarien </option>
+          <option value="Végétalien"> Végétalien </option>
+          <option value="Végan">Végan </option>
+          <option value="Allergique">Allergique </option>
+        </select>
+      </ion-col>
+    </ion-row>
+
+
+
+    <ion-row *ngIf="regime_alim== 'Allergique'">
+      <ion-col sizeLg="12" sizeMd="12" sizeXs="12" > 
+        <b style="color:rgb(0, 0, 0);">Mon commentaire allergènes  </b>
+        <ion-item class="roundedInput">
+          <ion-label  position="stacked">Mon commentaire allergènes</ion-label>
+          <ion-textarea [autoGrow]="true" height=500px placeholder="Mon commentaire ici ..." [autoGrow]="true" [(ngModel)]="notes" >
+          </ion-textarea>
+        </ion-item>
+      </ion-col>
+     </ion-row>
+
+
+
+    <ion-row >
+      <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+        <ion-label  position="floating"><b style="color:black;">Ma réservation d'hotel </b></ion-label>
+        <select [(ngModel)]="resa_hotel" color="light"  class="roundedInput"  style="background: white;color: black;">
+            <option value="Je ne réserve pas de chambre."> Je ne réserve pas de chambre </option>
+            <option value="Je réserve une chambre individuelle.">   Je réserve une chambre individuelle </option>
+            <option value="Je réserve une chambre Twin (2 lits séparés) avec une connaissance.">Je réserve une chambre Twin (2 lits séparés) avec une connaissance </option>
+            <option value="Je réserve une chambre Twin (2 lits séparés), mais je ne connais personne.">Je réserve une chambre Twin (2 lits séparés), mais je ne connais personne. </option>
+        </select>
+
+      <br>
+      <small  *ngIf="resa_hotel== 'Je réserve une chambre individuelle.'">
+        Je réserve une chambre individuelle (en supplément et limitée aux 40 premières réservations). Chambre non annulable et non remboursable.
+      </small>
+      <small  *ngIf="resa_hotel== 'Je réserve une chambre Twin (2 lits séparés) avec une connaissance.'">
+        Je réserve une chambre Twin (2 lits séparés) avec une connaissance, que je sélectionne dans la liste des personnes inscrites:
+      </small>
+     <small  *ngIf="resa_hotel== 'Je réserve une chambre Twin (2 lits séparés), mais je ne connais personne.'">
+        Je réserve une chambre Twin (2 lits séparés), mais je ne connais personne. Sélectionnez-moi quelqu'un SVP (Même tranche d'âge, même type de fonction).
+      </small>
+      </ion-col>
+    </ion-row>
+
+    <ion-row >
+      <ion-col sizeLg="12" sizeMd="12" sizeXs="12" >
+        <ion-label ><b style="color:black;">Mon moyen de transport pour venir </b></ion-label>
+        <select [(ngModel)]="transport" color="light"  style="background: white;color: black;">
+          <option value="Voiture"> Voiture</option>
+          <option value="Train">Train </option>
+          <option value="Avion">Avion </option>
+          <option value="Autre">Autre</option>
+        </select>
+      </ion-col>
+    </ion-row>
+  
+   
+      <ion-item >
+        <div class="item-note" slot="end">
+        <ion-button color="light" size="medium" (click)="editpage4()" >Annuler </ion-button>
+        <ion-button color="secondary" size="medium" (click)="doSaveUser()">Enregistrer</ion-button>
+        </div>
+       </ion-item>
+    </ion-col>
+</ion-row>
+</ion-list>
+
+
+<div *ngIf="resa_hotel=='Je réserve une chambre Twin (2 lits séparés) avec une connaissance.'||resa_hotel== 'Je réserve une chambre Twin (2 lits séparés), mais je ne connais personne.'" >
+<h1> Mon colocataire </h1>
+
+<ion-list lines="none" class="list-md">
+  <ion-row >
+    <ion-col sizeLg="9" sizeMd="9" sizeXs="12" *ngIf="postscolocataire">
+      <ion-item *ngFor="let item of postscolocataire"  >
+        <ion-avatar slot="start"  [ngStyle]="{'background-color': item.color}" style="padding:3px"  >
+          <img  src="{{item.user_avatar}}">
+        </ion-avatar>
+        <ion-label >
+          <ion-text>
+            <h2><b>{{item.firstname}} {{item.lastname}}</b> <br>
+            {{item.customer_type}}<br>
+            {{item.centre_regionale}}, {{item.company}} </h2>
+          </ion-text>
+          <ion-button    slot="end" > Groupe {{item.category}}  </ion-button>
+        </ion-label>
+
+        <div class="item-note" slot="end">
+          <ion-button ion-button item-end small color="secondary"  (click)="seachcoloc()" ><ion-icon name="create-outline"></ion-icon> Modifier</ion-button>
+        </div>
+      </ion-item>
+    </ion-col>
+
+
+    <ion-col sizeLg="9" sizeMd="9" sizeXs="12" *ngIf="idcolocataire==0||idcolocataire==null">
+      <ion-item  >
+        <ion-button ion-button item-end small color="secondary"  (click)="seachcoloc()" ><ion-icon name="add-circle"></ion-icon> Cherche</ion-button>
+      </ion-item>
+    </ion-col>
+
+    <ion-col sizeLg="3" sizeMd="3" sizeXs="12" >    
+      <ion-item>
+      </ion-item> 
+    </ion-col>
+
+</ion-row>
+</ion-list>
+</div>
+
+     <h1 *ngIf="label3==1"> Mon Badge</h1>
+      <div style="padding-top: 10px;" *ngIf="label3==1">
+        <ion-button icon-left color="primary" expand="full" shape="round"(click)="badge()" >
+        <b>  Mon badge</b>
+        </ion-button>
+      </div>
+
+
+    
+      <h1 *ngIf="label4==1">  Récapitulatif </h1>
+      <div style="padding-top: 10px;text-align:center;" *ngIf="label4==1">
+        <ion-button icon-left color="primary" expand="full" shape="round" (click)="saveRecapPdf()">
+          <b>  Notes des Ateliers </b>
+        </ion-button>
+      </div>
+
+
+      <h1> Mon voyage </h1>
+      <div style="padding-top: 10px;">
+        <ion-button icon-left color="success" expand="full" shape="round"(click)="carbone()" >
+        <b>  Calcul de l’empreinte carbone</b>
+        </ion-button>
+      </div>
+      <div style="padding-top: 20px;">
+        <ion-button icon-left color="secondary" expand="full" shape="round"  (click)="delete()"  tappable>
+        <b> Supprimer mon compte </b>
+        </ion-button>
+        </div>
+
+<div style="padding-top:20px;">
+<ion-button icon-left color="secondary" expand="full" shape="round"  (click)="logout()"  tappable>
+<b> Déconnexion </b>
+</ion-button>
+</div>
+
+</ion-col>
+
+  <ion-col sizeLg="3" sizeMd="3" sizeXs="12" class="padding"  >
+  </ion-col> 
+
+  </ion-row>
+  </ion-content>
+  
+  
+
+
